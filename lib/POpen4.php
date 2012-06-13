@@ -1,6 +1,6 @@
 <?php
 
-require_once 'POpen4Exception.php';
+require_once 'POpen4/Exception.php';
 
 class POpen4
 {
@@ -22,7 +22,7 @@ class POpen4
 		$this->_process = proc_open($cmd, $descriptorspec, $this->_pipes, $cwd, $env);
 		$this->status();
 		if ($this->_process===false) {
-			throw new POpen4Exception("proc_open error");
+			throw new POpen4_Exception("proc_open error");
 		}
 	}
 
@@ -98,7 +98,7 @@ class POpen4
 	public static function popen4($cmd, $block)
 	{
 		if (!is_callable($block)) {
-			throw new POpen4Exception("block is not callable");
+			throw new POpen4_Exception("block is not callable");
 		}
 		$p = new self($cmd);
 		$block($p->pid(), $p->stdin(), $p->stdout(), $p->stderr());
